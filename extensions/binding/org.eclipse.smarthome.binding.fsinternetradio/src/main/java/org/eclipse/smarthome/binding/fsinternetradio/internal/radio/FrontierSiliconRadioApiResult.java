@@ -58,7 +58,7 @@ public class FrontierSiliconRadioApiResult {
      * Create result object from XML that was received from the radio.
      *
      * @param requestResultString
-     *            The XML string received from the radio.
+     *                                The XML string received from the radio.
      * @throws IOException in case the XML returned by the radio is invalid.
      */
     public FrontierSiliconRadioApiResult(String requestResultString) throws IOException {
@@ -164,6 +164,18 @@ public class FrontierSiliconRadioApiResult {
         }
     }
 
+    public int getArrayLength(String elementName) {
+        try {
+            final Element fsApiResult = (Element) xmlDoc.getElementsByTagName("fsapiResponse");
+            final int fsApiArrayLength = fsApiResult.getElementsByTagName("fsapiResponse").getLength();
+            logger.info(Integer.toString(fsApiArrayLength));
+            return fsApiArrayLength;
+        } catch (Exception e) {
+            logger.error("getting ArrayLength failed with {}: {})", e.getClass().getName(), e.getMessage());
+            return 0;
+        }
+    }
+
     /**
      * read the &lt;value&gt;&lt;c8_array&gt; field as String
      *
@@ -200,7 +212,7 @@ public class FrontierSiliconRadioApiResult {
      * converts the string we got from the radio to a parsable XML document
      *
      * @param xmlString
-     *            the XML string read from the radio
+     *                      the XML string read from the radio
      * @return the parsed XML document
      * @throws ParserConfigurationException
      * @throws SAXException
@@ -218,7 +230,7 @@ public class FrontierSiliconRadioApiResult {
      * convert the value of a given XML element to a string for further processing
      *
      * @param e
-     *            XML Element
+     *              XML Element
      * @return the elements value converted to string
      */
     private static String getCharacterDataFromElement(Element e) {

@@ -33,6 +33,7 @@ public class FrontierSiliconRadioConstants {
     public static final String REQUEST_GET_PLAY_INFO_NAME = "GET/netRemote.play.info.name";
 
     public static final String REQUEST_GET_SIGNAL_STRENGTH = "GET/netRemote.sys.net.wlan.rssi";
+    public static final String REQUEST_LGN_VALID_MODES = "LIST_GET_NEXT/netRemote.sys.caps.validModes/-1";
 
     /** URL path, must begin with a slash (/) */
     public static final String CONNECTION_PATH = "/fsapi";

@@ -129,6 +129,12 @@ public class FSInternetRadioDiscoveryParticipant implements UpnpDiscoveryPartici
         final Set<String> rokuRadios = new HashSet<String>();
         SUPPORTED_RADIO_MODELS.put("ROKU", rokuRadios);
         rokuRadios.add("M1001");
+
+        // as reported in: https://community.openhab.org/t/internet-radio-i-need-your-help/2131/25
+        final Set<String> dualRadios = new HashSet<String>();
+        SUPPORTED_RADIO_MODELS.put("DUAL", dualRadios);
+        rokuRadios.add("IR 3A");
+
     }
 
     @Override

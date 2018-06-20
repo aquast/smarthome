@@ -106,7 +106,11 @@ public class FSInternetRadioHandler extends BaseThingHandler {
                                 break;
                             case CHANNEL_SIGNAL_STRENGTH:
                                 updateState(channel.getUID(),
-                                        DecimalType.valueOf(String.valueOf(radio.getSignalPercent())));
+                                        DecimalType.valueOf(String.valueOf(radio.getSignalStrength())));
+                                break;
+                            case CHANNEL_VALID_MODE_IDS:
+                                updateState(channel.getUID(),
+                                        DecimalType.valueOf(String.valueOf(radio.getAvailableModes())));
                                 break;
                             default:
                                 logger.warn("Ignoring unknown channel during update: {}", channel.getLabel());

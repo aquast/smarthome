@@ -37,9 +37,9 @@ public class FrontierSiliconRadio {
     /**
      * Constructor for the Radio class
      *
-     * @param hostname Host name of the Radio addressed, e.g. "192.168.0.100"
-     * @param port Port number, default: 80 (http)
-     * @param pin Access PIN number of the radio. Must be 4 digits, e.g. "1234"
+     * @param hostname   Host name of the Radio addressed, e.g. "192.168.0.100"
+     * @param port       Port number, default: 80 (http)
+     * @param pin        Access PIN number of the radio. Must be 4 digits, e.g. "1234"
      * @param httpClient http client instance to use
      *
      * @author Rainer Ostendorf
@@ -77,7 +77,7 @@ public class FrontierSiliconRadio {
      * Turn radio on/off
      *
      * @param powerOn
-     *            true turns on the radio, false turns it off
+     *                    true turns on the radio, false turns it off
      * @throws IOException if communication with the radio failed, e.g. because the device is not reachable.
      */
     public void setPower(boolean powerOn) throws IOException {
@@ -113,7 +113,7 @@ public class FrontierSiliconRadio {
      * Set the radios volume
      *
      * @param volume
-     *            Radio volume: 0=mute, 32=max. volume
+     *                   Radio volume: 0=mute, 32=max. volume
      * @throws IOException if communication with the radio failed, e.g. because the device is not reachable.
      */
     public void setVolumeAbsolute(int volume) throws IOException {
@@ -127,7 +127,7 @@ public class FrontierSiliconRadio {
      * Set the radios volume in percent
      *
      * @param volume
-     *            Radio volume: 0=muted, 100=max. volume (100 corresponds 32 absolute value)
+     *                   Radio volume: 0=muted, 100=max. volume (100 corresponds 32 absolute value)
      * @throws IOException if communication with the radio failed, e.g. because the device is not reachable.
      */
     public void setVolumePercent(int volume) throws IOException {
@@ -174,7 +174,7 @@ public class FrontierSiliconRadio {
      * Set the radio operating mode
      *
      * @param mode
-     *            On hama radio: 0="Internet Radio", 1=Spotify, 2=Player, 3="AUX IN"
+     *                 On hama radio: 0="Internet Radio", 1=Spotify, 2=Player, 3="AUX IN"
      * @throws IOException if communication with the radio failed, e.g. because the device is not reachable.
      */
     public void setMode(int mode) throws IOException {
@@ -231,7 +231,7 @@ public class FrontierSiliconRadio {
      * mute the radio volume
      *
      * @param muted
-     *            true: mute the radio, false: unmute the radio
+     *                  true: mute the radio, false: unmute the radio
      * @throws IOException if communication with the radio failed, e.g. because the device is not reachable.
      */
     public void setMuted(boolean muted) throws IOException {
@@ -245,10 +245,14 @@ public class FrontierSiliconRadio {
      * @return signal strength
      * @throws IOException if communication with the radio failed, e.g. because the device is not reachable.
      */
-    public int getSignalPercent() throws IOException {
+    public int getSignalStrength() throws IOException {
         FrontierSiliconRadioApiResult result = conn.doRequest(REQUEST_GET_SIGNAL_STRENGTH);
         return result.getValueU8AsInt();
     }
 
+    public int getAvailableModes() throws IOException {
+        FrontierSiliconRadioApiResult result = conn.doRequest(REQUEST_LGN_VALID_MODES, "maxItems=6500");
+        return result.getArrayLength("item");
+    }
 
 }

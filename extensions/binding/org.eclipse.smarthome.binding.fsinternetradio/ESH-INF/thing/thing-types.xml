@@ -18,6 +18,8 @@
 			<channel id="play-info-text" typeId="play-info-text" />
 			<channel id="preset" typeId="preset" />
 			<channel id="signal-strength" typeId="signal-strength" />
+            <channel id="valid-mode-names" typeId="valid-mode-names" />
+            <channel id="valid-mode-ids" typeId="valid-mode-ids" />
 		</channels>
 
 		<properties>
@@ -102,7 +104,13 @@
 		<label>Signal</label>
 		<description>A Wi-Fi signal indicator.</description>
 		<category>QualityOfService</category>
-		<state readOnly="true" pattern="%d dBm" />
+		<state readOnly="true" pattern="%d %%" />
+	</channel-type>
+	<channel-type id="valid-mode-ids" advanced="true">
+		<item-type>Number</item-type>
+		<label>Operating Modes</label>
+		<description>A List of available operation modes.</description>
+		<state readOnly="true" pattern="%d" />
 	</channel-type>
 
 </thing:thing-descriptions>
