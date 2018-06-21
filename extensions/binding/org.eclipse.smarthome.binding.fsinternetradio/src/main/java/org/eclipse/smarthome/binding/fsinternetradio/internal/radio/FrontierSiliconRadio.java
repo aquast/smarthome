@@ -15,6 +15,8 @@ package org.eclipse.smarthome.binding.fsinternetradio.internal.radio;
 import static org.eclipse.smarthome.binding.fsinternetradio.internal.radio.FrontierSiliconRadioConstants.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 import org.eclipse.jetty.client.HttpClient;
 
@@ -250,9 +252,9 @@ public class FrontierSiliconRadio {
         return result.getValueU8AsInt();
     }
 
-    public int getAvailableModes() throws IOException {
+    public ArrayList<Hashtable<String,String>> getAvailableModes() throws IOException {
         FrontierSiliconRadioApiResult result = conn.doRequest(REQUEST_LGN_VALID_MODES, "maxItems=6500");
-        return result.getArrayLength("item");
+        return result.getItemList("item");
     }
 
 }

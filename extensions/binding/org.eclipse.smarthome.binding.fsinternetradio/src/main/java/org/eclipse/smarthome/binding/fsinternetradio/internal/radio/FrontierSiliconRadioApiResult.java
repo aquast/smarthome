@@ -14,6 +14,8 @@ package org.eclipse.smarthome.binding.fsinternetradio.internal.radio;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -164,15 +166,22 @@ public class FrontierSiliconRadioApiResult {
         }
     }
 
-    public int getArrayLength(String elementName) {
+    public ArrayList<String> getItemList(String elementName) {
         try {
+        	ArrayList<String> itemList = new ArrayList<String>();
             final Element fsApiResult = (Element) xmlDoc.getElementsByTagName("fsapiResponse");
-            final int fsApiArrayLength = fsApiResult.getElementsByTagName("fsapiResponse").getLength();
-            logger.info(Integer.toString(fsApiArrayLength));
-            return fsApiArrayLength;
+            final NodeList nodeList = fsApiResult.getElementsByTagName(elementName);
+            for(int i=0; i<nodeList.getLength(); i++) {
+                Element nodeElement = (Element) nodeList.item(i);
+                Element fieldElement = (Element) nodeElement.getElementsByTagName("field").item(0);
+                Element c8Array = (Element) fieldElement.getElementsByTagName("c8_array").item(0);
+
+                itemList.add(getCharacterDataFromElement(c8Array));
+            }
+            return itemList;
         } catch (Exception e) {
             logger.error("getting ArrayLength failed with {}: {})", e.getClass().getName(), e.getMessage());
-            return 0;
+            return null;
         }
     }
 
